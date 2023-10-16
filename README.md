@@ -3,4 +3,5 @@ Keycloak experiment
 
 ## Up and running
 
-`docker-compose up`
+- `docker-compose up`
+- `cd client && pnpm install && pnpm run start:debug`
