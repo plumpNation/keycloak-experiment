@@ -18,7 +18,7 @@ import { AppService } from './app.service';
       authServerUrl:
         'http://localhost:8080/realms/demo/protocol/openid-connect/auth',
       realm: 'demo',
-      clientId: 'demo-nestjs-app',
+      clientId: 'demo-nestjs-client',
       // Secret key of the client taken from keycloak server
       secret: 'R2UwT7lNwbDHGCoD9BjgoxwoxMT0mFYg',
     }),
