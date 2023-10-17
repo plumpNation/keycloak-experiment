@@ -6,5 +6,5 @@ up:
 down:
 	docker-compose down
 
-client:
-	cd client && pnpm install && pnpm run start:debug
+nestjs-client:
+	cd clients/nestjs && pnpm install && pnpm run start:debug
