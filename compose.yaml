@@ -1,39 +1,42 @@
-version: '3.8'
+version: "3.8"
 services:
-  # postgresql:
-  #   image: postgres:16
-  #   environment:
-  #     - POSTGRES_USER=keycloak
-  #     - POSTGRES_DB=keycloak
-  #     - POSTGRES_PASSWORD=SUPERsecret
-  #   volumes:
-  #     - './db/postgresql_data:/var/lib/postgresql/data'
-    # networks:
-    #   keycloak:
+  postgres:
+    image: postgres:16
+    environment:
+      - POSTGRES_USER=keycloak
+      - POSTGRES_DB=keycloak
+      - POSTGRES_PASSWORD=SUPERsecret
+    volumes:
+      - "./db/postgresql_data:/var/lib/postgresql/data"
+    networks:
+      keycloak:
 
   keycloak:
     image: quay.io/keycloak/keycloak:22.0.3
-    # restart: always
+    restart: on-failure:5
     command: start-dev
-    # depends_on:
-    #   - postgresql
+    depends_on:
+      - postgres
     ports:
       - 8080:8080
     environment:
+      - KC_DB=postgres
+      # - KC_DB_SCHEMA=keycloak
+      # - DB=keycloak # for local in memory h2 db
+      - KC_DB_URL_HOST=postgres
+      # - KC_DB_URL='jdbc:postgresql://postgres:5432/postgresql?ssl=allow'
+      - KC_DB_USERNAME=keycloak
+      - KC_DB_PASSWORD=SUPERsecret
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
       # - KC_PROXY_ADDRESS_FORWARDING=true
       # - KC_HOSTNAME_STRICT=false
       # - KC_HOSTNAME=localhost
       # - KC_PROXY=edge
       # - KC_HTTP_ENABLED=true
-      - DB=keycloak
-      - DB_URL='jdbc:postgresql://postgres:5432/postgresql?ssl=allow'
-      - DB_USERNAME=keycloak
-      - DB_PASSWORD=SUPERsecret
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin
-    # networks:
-    #   proxy:
-    #   keycloak:
+    networks:
+      # proxy:
+      keycloak:
     # labels:
     #   - "traefik.enable=true"
     #   - "traefik.http.routers.keycloak.entrypoints=http"
@@ -46,8 +49,7 @@ services:
     #   - "traefik.http.routers.keycloak-secure.service=keycloak"
     #   - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
     #   - "traefik.docker.network=proxy"
-
-# networks:
-#   proxy:
-#     external: true
-#   keycloak:
+networks:
+  # proxy:
+  #   external: true
+  keycloak:
