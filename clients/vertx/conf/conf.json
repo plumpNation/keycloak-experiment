@@ -1,0 +1,5 @@
+{
+  "OIDC_CLIENT": "demo-vertx-client",
+  "OIDC_CLIENT_SECRET": "cg9C2c7V9GVX1FZP7O3gfwgJF4W2zzzF",
+  "OIDC_DISCOVERY_URL": "http://localhost:8080/realms/demo"
+}

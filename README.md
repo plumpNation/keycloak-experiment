@@ -15,17 +15,9 @@ If not you need to setup your realm manually.
 ## Realm setup
 
 - Open keycloak (localhost:8080) and create a new realm called `demo`.
-- Create a client:
-  - type: OpenId Connect
-  - id: `demo-nestjs-app`
-  - authentication: on
-- Navigate to client credentials tab
-  - root URL: `localhost:3000`
-  - home URL: `/`
-  - valid redirect URIs: `/*`
-  - valid post logout redirect URIs: `/`
-  - home URL: `localhost:3000`
-  - web origins: `+`
+- Under Realm setting > Login, enable user registration.
+
+For client settings, look in the clients directory, and find a README.md.
 
 ## Interesting endpoints
 
